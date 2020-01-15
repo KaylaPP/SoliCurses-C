@@ -17,6 +17,9 @@ $(EXECUTABLE) : ${OBJECTS}
 	$(CC) $(CFLAGS) -o $@ $<
 
 clean : 
+	rm -rf *.o
+
+cleanall :
 	rm -rf *.o ${EXECUTABLE}
 
 run :
