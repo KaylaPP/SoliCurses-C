@@ -1,16 +1,17 @@
 #ifndef ARRAY_H
-# define ARRAY_H
+#define ARRAY_H
 
 #include "card.h"
+#define datatype card
 
 typedef struct
 {
-    card * array;
+    datatype * array;
     int used;
     int size;
 } Array;
 
-void Array_append(Array * a, card element);
+void Array_append(Array * a, datatype element);
 
 void Array_deallocate(Array * a);
 

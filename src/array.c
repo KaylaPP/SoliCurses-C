@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include "../include/array.h"
 
-void Array_append(Array * a, card element)
+void Array_append(Array * a, datatype element)
 {
     if(a->used == a->size)
     {
         a->size++;
         a->used++;
-        a->array = realloc(a->array, a->size * sizeof(card));
+        a->array = realloc(a->array, a->size * sizeof(datatype));
         a->array[a->size - 1] = element;
     }
     else
@@ -40,12 +40,12 @@ void Array_remove(Array * a, int index)
     }
     a->used--;
     a->size--;
-    a->array = realloc(a->array, a->size * sizeof(card));
+    a->array = realloc(a->array, a->size * sizeof(datatype));
 }
 
 void Array_init(Array * a, int initAmount)
 {
-    a->array = malloc(initAmount * sizeof(card));
+    a->array = malloc(initAmount * sizeof(datatype));
     a->used = 0;
     a->size = initAmount;
 }
