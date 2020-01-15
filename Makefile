@@ -1,4 +1,4 @@
-CC=gcc-9
+CC=clang
 CFLAGS=-pthread -c -g
 LDFLAGS=-lncurses
 EXECUTABLE=SoliCurses-C.out
