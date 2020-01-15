@@ -3,8 +3,9 @@
 
 typedef enum
 {
+    S_PH,
     Club,
-    Diamon,
+    Diamond,
     Heart,
     Spade
 } suit;

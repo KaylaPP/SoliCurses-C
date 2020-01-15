@@ -3,7 +3,7 @@
 
 typedef enum
 {
-    None,
+    V_PH,
     Ace,
     Two,
     Three,

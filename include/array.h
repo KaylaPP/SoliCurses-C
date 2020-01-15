@@ -14,8 +14,8 @@ void Array_append(Array * a, card element);
 
 void Array_deallocate(Array * a);
 
-void Array_delete(Array * a, int index);
-
 void Array_init(Array * a, int initAmount);
+
+void Array_remove(Array * a, int index);
 
 #endif

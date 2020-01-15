@@ -1,9 +1,9 @@
 #include <ncurses.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include "../include/array.h"
 #include "../include/card.h"
 #include "../include/suits.h"
+#include "../include/values.h"
 
 int main(void)
 {
@@ -32,13 +32,12 @@ int main(void)
     endwin();
 
     card oop;
-    oop.s = Heart;
+    oop.s = Spade;
 
     Array var;
-    Array_init(&var, 1);
+    Array_init(&var, 2);
     Array_append(&var, oop);
-
-    printf("%i", var.array[0].s);
+    Array_remove(&var, 0);
 
     return 0;
 }
