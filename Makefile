@@ -1,26 +1,26 @@
-CC=gcc-9
+CC=clang
 CFLAGS=-pthread -c -g
 LDFLAGS=-lncurses
 EXECUTABLE=SoliCurses-C.out
-OBJDIR=./obj
 SRCDIR=./src
 
 SOURCES=$(wildcard ${SRCDIR}/*.c)
 
-OBJECTS=$(SOURCES:${SRCDIR}/%.c=$(OBJDIR)/%.o)
+OBJECTS=$(SOURCES:${SRCDIR}/%.c=%.o)
 
 all : $(EXECUTABLE)
-	rm -rf $(OBJDIR)
-	mkdir $(OBJDIR)
 
 $(EXECUTABLE) : ${OBJECTS}
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
+%.o : $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 clean : 
-	rm -rf $(OBJDIR)/*.o ${EXECUTABLE}
+	rm -rf *.o
+
+cleanall :
+	rm -rf *.o ${EXECUTABLE}
 
 run :
 	./$(EXECUTABLE)
