@@ -6,3 +6,8 @@ void Card_init(card * c, bool revealed, suit newsuit, value newvalue)
     c->v = newvalue;
     c->r = revealed;
 }
+
+void Card_reveal(card * c)
+{
+    c->r = true;
+}

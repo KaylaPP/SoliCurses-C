@@ -3,7 +3,7 @@
 
 typedef enum
 {
-    S_PH,
+    S_PH, // suit placeholder
     Club,
     Diamond,
     Heart,

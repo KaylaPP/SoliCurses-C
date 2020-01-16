@@ -2,21 +2,19 @@
 #define ARRAY_H
 
 #include "card.h"
-#define datatype card
+#define DATATYPE card *
 
 typedef struct
 {
-    datatype * array;
+    DATATYPE * array;
     int used;
     int size;
 } Array;
 
-void Array_append(Array * a, datatype element);
-
 void Array_deallocate(Array * a);
 
-void Array_init(Array * a, int initAmount);
+void Array_expand(Array * a, int amount);
 
-void Array_remove(Array * a, int index);
+void Array_init(Array * a, int initAmount);
 
 #endif

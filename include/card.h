@@ -14,4 +14,6 @@ typedef struct
 
 void Card_init(card * c, bool revealed, suit newsuit, value newvalue);
 
+void Card_reveal(card * c);
+
 #endif
