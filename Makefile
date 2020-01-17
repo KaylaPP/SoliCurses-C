@@ -22,5 +22,5 @@ clean :
 cleanall :
 	rm -rf *.o ${EXECUTABLE}
 
-run :
+run : all
 	./$(EXECUTABLE)
