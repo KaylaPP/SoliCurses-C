@@ -1,5 +1,5 @@
 #ifndef CARD_H
-# define CARD_H
+#define CARD_H
 
 #include <stdbool.h>
 #include "suits.h"

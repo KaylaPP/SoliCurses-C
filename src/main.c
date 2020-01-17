@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 #include "../include/array.h"
@@ -53,18 +54,23 @@ int main(void)
     halfdelay(1);
 
     // Create and shuffle cards
-    Array deck;
-    Array_init(&deck, 52);
-    make_and_shuffle(deck.array);
+    //Array deck;
+    //Array_init(&deck, 52);
+    //make_and_shuffle(deck.array);
 
     // Create placeholder card
-    card * PH;
-    Card_init(PH, true, S_PH, V_PH);
+    //card * PH;
+    //Card_init(PH, true, S_PH, V_PH);
 
     // Free pointers and remove terminal attributes
-    delete_cards(deck.array);
-    Array_deallocate(&deck);
+    //delete_cards(deck.array);
+    //Array_deallocate(&deck);
     endwin();
 
+    for(int i = 0; i < 256; i++)
+    {
+        printf("%c", i);
+    }
+    printf("\n");
     return 0;
 }
