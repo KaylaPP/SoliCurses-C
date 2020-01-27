@@ -10,12 +10,12 @@ void Array_deallocate(Array * a)
 
 void Array_expand(Array * a, int amount)
 {
-    a->array = realloc(a->array, (a->size + amount) * sizeof(DATATYPE));
+    a->array = realloc(a->array, (a->size + amount) * sizeof(card));
 }
 
 void Array_init(Array * a, int initAmount)
 {
-    a->array = malloc(initAmount * sizeof(DATATYPE));
+    a->array = malloc(initAmount * sizeof(card));
     a->used = 0;
     a->size = initAmount;
 }

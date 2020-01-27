@@ -7,26 +7,7 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-void make_and_shuffle(card ** deck)
-{
-    deck = malloc(52 * sizeof(card *));
-    for(int newsuit = 1, count = 0; newsuit <= 4; newsuit++)
-    {
-        for(int newval = 1; newval <= 13; newval++, count++)
-        {
-            deck[count] = malloc(sizeof(card));
-            Card_init(deck[count], false, (suit) newsuit, (value) newval);
-        }
-    }
-}
 
-void delete_cards(card ** deck)
-{
-    for(int i = 0; i < 52; i++)
-    {
-        free(deck[i]);
-    }
-}
 
 int main(void)
 {
@@ -53,13 +34,20 @@ int main(void)
     noecho();
     halfdelay(1);
 
+    // Create 52 unique cards
+    card cardobjs[52];
+    for(int s = 0, i = 0; s < 4; s++)
+    {
+        for(int v = 0; v < 13; v++, i++)
+        {
+            cardobjs[i].s = s;
+            cardobjs[i].v = v;
+            cardobjs[i].r = false;
+        }
+    }
+
     // Free pointers and end ncurses window
     endwin();
 
-    for(int i = 0; i < 1024; i++)
-    {
-        printf("%c", i);
-    }
-    printf("\n");
     return 0;
 }

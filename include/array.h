@@ -2,11 +2,10 @@
 #define ARRAY_H
 
 #include "card.h"
-#define DATATYPE card *
 
 typedef struct
 {
-    DATATYPE * array;
+    card * array;
     int used;
     int size;
 } Array;
