@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    card * array;
+    card ** array;
     int used;
     int size;
 } Array;
