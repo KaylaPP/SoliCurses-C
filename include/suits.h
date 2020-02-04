@@ -8,6 +8,6 @@ typedef enum
     Diamond,
     Heart,
     Spade
-} suit;
+} suit; // Suit of a card
 
 #endif

@@ -1,3 +1,5 @@
+#define SOLICURSES_DEBUG
+
 #include <ncurses.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -41,10 +43,12 @@ int main(void)
 
 void debugdeck(card * deck)
 {
+#ifdef SOLICURSES_DEBUG
     for(int i = 0; i < 52; i++)
     {
         printf("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
     }
+#endif
 }
 
 void initcards(card * deck)

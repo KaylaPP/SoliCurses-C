@@ -17,6 +17,6 @@ typedef enum
     Jack,
     Queen,
     King
-} value;
+} value; // Number value of a card from Ace to King
 
 #endif

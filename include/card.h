@@ -12,8 +12,10 @@ typedef struct
     value v;// Value of card
 } card;
 
+// Constructor method for a card
 void Card_init(card * c, bool revealed, suit newsuit, value newvalue);
 
+// Reveals a card irreversibly by setting c.r equal to true
 void Card_reveal(card * c);
 
 #endif
