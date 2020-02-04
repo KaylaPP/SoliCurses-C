@@ -1,5 +1,5 @@
 #ifndef SUIT_H
-#define SUIT_H
+    #define SUIT_H
 
 typedef enum
 {
