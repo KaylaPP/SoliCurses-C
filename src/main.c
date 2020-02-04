@@ -9,12 +9,16 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
+// Prints out each attribute of every card in deck
 void debugdeck(card * deck);
 
+// Adds 52 unique cards to deck
 void initcards(card * deck);
 
+// Randomizes the order of the cards in deck
 void shufflecards(card * deck);
 
+// Activates all attributes for the terminal using ncurses
 void startcurses(void);
 
 int main(void)

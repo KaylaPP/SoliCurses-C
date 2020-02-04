@@ -1,6 +1,27 @@
 #include <stdlib.h>
 #include "../include/array.h"
 
+card * Array_last(Array * a)
+{
+    return a->array[a->used - 1];
+}
+
+void Array_append(Array * a, card * c)
+{
+    if(a->used == a->size) // If all indices of a->array are full
+    {
+        a = realloc(a, (a->size + 1) * sizeof(card *));
+        a->size++;
+        a->array[a->size - 1] = c;
+        a->used++;
+    }
+    else
+    {
+        a->array[a->used - 1] = c;
+        a->used++;
+    }
+}
+
 void Array_deallocate(Array * a)
 {
     free(a->array);
@@ -8,14 +29,9 @@ void Array_deallocate(Array * a)
     a->size = 0;
 }
 
-void Array_expand(Array * a, int amount)
+void Array_init(Array * a)
 {
-    a->array = realloc(a->array, (a->size + amount) * sizeof(card *));
-}
-
-void Array_init(Array * a, int initAmount)
-{
-    a->array = malloc(initAmount * sizeof(card *));
+    a->array = malloc(sizeof(card *));
     a->used = 0;
-    a->size = initAmount;
+    a->size = 1;
 }

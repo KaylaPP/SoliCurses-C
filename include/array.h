@@ -10,13 +10,16 @@ typedef struct
     int size;
 } Array;
 
+// Returns last item in array
+card * Array_last(Array * a);
+
+// Adds object to end of array with size of array considered
+void Array_append(Array * a, card * c);
+
 // Deallocates a.array and sets a.used and a.size equal to 0
 void Array_deallocate(Array * a);
 
-// Increases size of array by amount
-void Array_expand(Array * a, int amount);
-
-// Constructor method for array which specifies an initial amount
-void Array_init(Array * a, int initAmount);
+// Constructor method for array
+void Array_init(Array * a);
 
 #endif
