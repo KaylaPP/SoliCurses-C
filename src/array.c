@@ -3,6 +3,10 @@
 
 card * Array_last(Array * a)
 {
+    if(a->used == 0)
+    {
+        //return Card_PH();
+    }
     return a->array[a->used - 1];
 }
 
