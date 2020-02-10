@@ -15,8 +15,6 @@ typedef struct
 // Constructor method for a card
 void Card_init(card * c, bool revealed, suit newsuit, value newvalue);
 
-// Returns a placeholder card
-
 // Reveals a card irreversibly by setting c.r equal to true
 void Card_reveal(card * c);
 

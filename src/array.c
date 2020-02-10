@@ -3,10 +3,6 @@
 
 card * Array_last(Array * a)
 {
-    if(a->used == 0)
-    {
-        //return Card_PH();
-    }
     return a->array[a->used - 1];
 }
 
@@ -19,9 +15,14 @@ void Array_append(Array * a, card * c)
         a->array[a->size - 1] = c;
         a->used++;
     }
-    else
+    else if(a->used > 0)
     {
         a->array[a->used - 1] = c;
+        a->used++;
+    }
+    else
+    {
+        a->array[0] = c;
         a->used++;
     }
 }

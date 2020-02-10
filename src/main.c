@@ -23,17 +23,14 @@ void startcurses(void);
 
 int main(void)
 {
-    // Create random seed from machine time
+    // Create random seed from computer time
     srand(time(NULL));
 
-    // Initialize ncurses attributes
     startcurses();
 
     // Create 52 unique cards and a placholder
     card cardobjs[52];
-    card PH;
-    
-    Card_init(&PH, true, S_PH, V_PH);
+
     initcards(cardobjs);
 
     // Randomize card arrangement
@@ -81,7 +78,7 @@ void shufflecards(card * deck)
 
 void startcurses(void)
 {
-    // Initialize ncurses terminal mode
+    // Initialize curses terminal attributes
     initscr();
     if(has_colors() == FALSE)
     {    
