@@ -1,6 +1,6 @@
 #define SOLICURSES_DEBUG
 
-#include <ncurses.h>
+#include <curses.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
