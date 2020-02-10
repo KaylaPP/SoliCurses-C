@@ -5,12 +5,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../include/array.h"
+#include "../include/board.h"
 #include "../include/card.h"
 #include "../include/suits.h"
 #include "../include/values.h"
 
 // Prints out each attribute of every card in deck
 void debugdeck(card * deck);
+
+// Initializes array with 52 cards distributed on the gameboards
+void initarray(Array ** a, card * deck);
 
 // Adds 52 unique cards to deck
 void initcards(card * deck);
@@ -30,11 +34,15 @@ int main(void)
 
     // Create 52 unique cards and a placholder
     card cardobjs[52];
-
     initcards(cardobjs);
 
     // Randomize card arrangement
     shufflecards(cardobjs);
+
+    // Initialize array of type Array with the discard, foundation, and tableau
+    Array ** board;
+    board = (Array **) malloc(12 * sizeof(Array *));
+    initarray(board, cardobjs);
 
     // Free pointers and end ncurses window
     endwin();
@@ -50,6 +58,24 @@ void debugdeck(card * deck)
         printf("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
     }
 #endif
+}
+
+void initarray(Array ** a, card * deck)
+{
+    int count = 0;
+
+    for(int i = 0; i < 12; i++)
+    {
+        Array_init(a[i]);
+    }
+
+    for(int i = T1; i <= T7; i++)
+    {
+        for(int j = 0; j <= i; j++)
+        {
+            Array_append(a[j], &deck[count++]);
+        }
+    }
 }
 
 void initcards(card * deck)

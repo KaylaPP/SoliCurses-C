@@ -6,8 +6,8 @@
 typedef struct
 {
     card ** array;
-    int used;
-    int size;
+    size_t used;
+    size_t size;
 } Array;
 
 // Returns last item in array

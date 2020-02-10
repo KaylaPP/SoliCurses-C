@@ -6,25 +6,13 @@ card * Array_last(Array * a)
     return a->array[a->used - 1];
 }
 
-void Array_append(Array * a, card * c)
-{
-    if(a->used == a->size) // If all indices of a->array are full
+void Array_append(Array * a, card * c) {
+    if (a->used == a->size) 
     {
-        a = realloc(a, (a->size + 1) * sizeof(card *));
-        a->size++;
-        a->array[a->size - 1] = c;
-        a->used++;
+        a->size *= 2;
+        a->array = (card **) realloc(a->array, a->size * sizeof(card *));
     }
-    else if(a->used > 0)
-    {
-        a->array[a->used - 1] = c;
-        a->used++;
-    }
-    else
-    {
-        a->array[0] = c;
-        a->used++;
-    }
+    a->array[a->used++] = c;
 }
 
 void Array_deallocate(Array * a)
@@ -36,7 +24,7 @@ void Array_deallocate(Array * a)
 
 void Array_init(Array * a)
 {
-    a->array = malloc(sizeof(card *));
+    a->array = (card **) malloc(sizeof(card *));
     a->used = 0;
     a->size = 1;
 }
