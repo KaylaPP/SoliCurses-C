@@ -10,9 +10,6 @@ typedef struct
     size_t size;
 } Array;
 
-// Returns last item in array
-card * Array_last(Array * a);
-
 // Adds object to end of array with size of array considered
 void Array_append(Array * a, card * c);
 
@@ -20,6 +17,6 @@ void Array_append(Array * a, card * c);
 void Array_deallocate(Array * a);
 
 // Constructor method for array
-void Array_init(Array * a);
+void Array_init(Array * a, size_t initsize);
 
 #endif
