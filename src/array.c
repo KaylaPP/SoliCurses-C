@@ -4,7 +4,7 @@
 void Array_append(Array * a, card * c) {
     if (a->used == a->size) 
     {
-        a->size *= 2;
+        a->size++;
         a->array = (card **) realloc(a->array, a->size * sizeof(card *));
     }
 

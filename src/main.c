@@ -30,7 +30,7 @@ int main(void)
     // Create random seed from computer time
     srand(time(NULL));
 
-    //startcurses();
+    startcurses();
 
     // Create 52 unique cards and a placholder
     card ** cardobjs = (card **) malloc(52 * sizeof(card *));
@@ -45,7 +45,7 @@ int main(void)
     initarray(board, cardobjs);
 
     // Free pointers and end ncurses window
-    //endwin();
+    endwin();
 
     return 0;
 }
@@ -64,16 +64,13 @@ void initarray(Array * a, card ** deck)
 {
     int count = 0;
 
-    Array_init(&a[DS], 24);
-
-    for(int i = F1; i <= F4; i++)
+    for(int i = DS; i <= T7; i++)
     {
         Array_init(&a[i], 1);
     }
 
     for(int i = T1; i <= T7; i++)
     {
-        Array_init(&a[i], 7);
         for(int j = 0; j <= i - T1; j++)
         {
             Array_append(&a[i], deck[count++]);
