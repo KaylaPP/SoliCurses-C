@@ -3,12 +3,12 @@
 
 typedef enum
 {
-    DS,
-    F1,
+    DS, // Discard
+    F1, // Fn -> Foundation number n
     F2,
     F3,
     F4,
-    T1,
+    T1, // Tn -> Tableau number n
     T2,
     T3,
     T4,

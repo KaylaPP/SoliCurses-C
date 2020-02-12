@@ -21,4 +21,4 @@ clean :
 	rm -rf $(BINDIR)/*.o $(EXECUTABLE)
 
 run : all
-	./$(EXECUTABLE)
+	$(EXECUTABLE)

@@ -10,8 +10,14 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
+// Prints gameboard in a grid
+void debugarray(Array * a);
+
 // Prints out each attribute of every card in deck
 void debugdeck(card * deck);
+
+// Frees gameboard
+void freearray(Array * a);
 
 // Initializes array with 52 cards distributed on the gameboards
 void initarray(Array * a, card * deck);
@@ -43,11 +49,27 @@ int main(void)
     Array * board;
     board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
+    debugarray(board);
 
     // Free pointers and end ncurses window
     endwin();
+    freearray(board);
 
     return 0;
+}
+
+void debugarray(Array * a)
+{
+#ifdef SOLICURSES_DEBUG
+    for(int i = DS; i <= T7; i++)
+    {
+        for(int j = 0; j < a[i].used; j++)
+        {
+            printf("%i s\t%i v\t%i r||\t", a[i].array[j]->s, a[i].array[j]->v, a[i].array[j]->r);
+        }
+        printf("\n");
+    }
+#endif
 }
 
 void debugdeck(card * deck)
@@ -58,6 +80,15 @@ void debugdeck(card * deck)
         printf("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
     }
 #endif
+}
+
+void freearray(Array * a)
+{
+    for(int i = DS; i <= T7; i++)
+    {
+        Array_deallocate(&a[i]);
+    }
+    free(a);
 }
 
 void initarray(Array * a, card * deck)
@@ -75,14 +106,15 @@ void initarray(Array * a, card * deck)
         {
             Array_append(&a[i], &deck[count++]);
         }
+        Card_reveal(Array_last(&a[i]));
     }
 }
 
 void initcards(card * deck)
 {
-    for(int s = 1, i = 0; s <= 4; s++)
+    for(int s = Club, i = 0; s <= Spade; s++)
     {
-        for(int v = 1; v <= 13; v++, i++)
+        for(int v = Ace; v <= King; v++, i++)
         {
             Card_init(&deck[i], false, s, v);
         }
@@ -104,6 +136,7 @@ void shufflecards(card * deck)
 
 void startcurses(void)
 {
+#ifndef SOLICURSES_DEBUG
     // Initialize curses terminal attributes
     initscr();
     if(has_colors() == FALSE)
@@ -123,4 +156,5 @@ void startcurses(void)
     keypad(stdscr, true);
     noecho();
     halfdelay(1);
+#endif
 }

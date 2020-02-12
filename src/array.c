@@ -1,6 +1,11 @@
 #include <stdlib.h>
 #include "../include/array.h"
 
+card * Array_last(Array * a)
+{
+    return a->array[a->used - 1];
+}
+
 void Array_append(Array * a, card * c) {
     if (a->used == a->size) 
     {
