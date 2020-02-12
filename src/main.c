@@ -33,7 +33,7 @@ int main(void)
     startcurses();
 
     // Create 52 unique cards and a placholder
-    card * cardobjs = (card *) malloc(52 * sizeof(card));
+    card cardobjs[52];
     initcards(cardobjs);
 
     // Randomize card arrangement
