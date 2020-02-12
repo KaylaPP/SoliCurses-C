@@ -1,24 +1,24 @@
 CC=gcc
 CFLAGS=-pthread -c -g
 LDFLAGS=-lncurses
-EXECUTABLE=./SoliCurses-C.out
+EXECUTABLE=./SoliCurses-C.exe
 SRCDIR=./src
 BINDIR=./bin
 
 SOURCES=$(wildcard ${SRCDIR}/*.c)
 
-OBJECTS=$(SOURCES:${SRCDIR}/%.c=$(BINDIR)/%.o)
+OBJECTS=$(SOURCES:${SRCDIR}/%.c=$(BINDIR)/%.dll)
 
 all : $(EXECUTABLE)
 
 $(EXECUTABLE) : ${OBJECTS}
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-$(BINDIR)/%.o : $(SRCDIR)/%.c
+$(BINDIR)/%.dll : $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 clean : 
-	rm -rf $(BINDIR)/*.o $(EXECUTABLE)
+	rm -rf $(BINDIR)/*.dll $(EXECUTABLE)
 
 run : all
 	$(EXECUTABLE)

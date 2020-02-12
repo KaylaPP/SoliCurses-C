@@ -1,4 +1,4 @@
-#define SOLICURSES_DEBUG
+//#define SOLICURSES_DEBUG
 
 #include <curses.h>
 #include <stdbool.h>
