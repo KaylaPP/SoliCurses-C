@@ -46,8 +46,7 @@ int main(void)
     shufflecards(cardobjs);
 
     // Initialize array of type Array with the discard, foundation, and tableau
-    Array * board;
-    board = (Array *) malloc(12 * sizeof(Array));
+    Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
     debugarray(board);
 
