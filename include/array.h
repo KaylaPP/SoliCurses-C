@@ -23,4 +23,7 @@ void Array_deallocate(Array * a);
 // Constructor method for array
 void Array_init(Array * a, size_t initsize);
 
+// Removes all elements in an array following and including index i
+void Array_recursive_remove(Array * a, int i);
+
 #endif

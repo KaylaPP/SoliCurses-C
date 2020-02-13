@@ -6,7 +6,8 @@ card * Array_last(Array * a)
     return a->array[a->used - 1];
 }
 
-void Array_append(Array * a, card * c) {
+void Array_append(Array * a, card * c) 
+{
     if (a->used == a->size) 
     {
         a->size++;
@@ -14,6 +15,19 @@ void Array_append(Array * a, card * c) {
     }
 
     a->array[a->used++] = c;
+}
+
+void Array_recursive_remove(Array * a, int i)
+{
+    int count = 0;
+
+    for(;i < a->used; i++)
+    {
+        a->array[i] = NULL;
+    }
+
+    a->used -= count;
+    a->array = realloc(a->array, a->used * sizeof(card *));
 }
 
 void Array_deallocate(Array * a)
