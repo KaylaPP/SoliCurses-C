@@ -9,14 +9,12 @@ Dependencies:
 
     make
     
-    python3
-    
     ncurses
    
 How to build and run:
-
-    python3 configure.py // Or remove a makefile's extension depending on OS if you know what you want
     
     make
     
+    // Or
+
     make run
