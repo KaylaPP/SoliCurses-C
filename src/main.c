@@ -48,7 +48,7 @@ int main(void)
     // Initialize array of type Array with the discard, foundation, and tableau
     Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
-    Array_recursive_remove(&board[T4], 1);
+    Array_recursive_remove(&board[T4], -1);
     debugarray(board);
 
     // Free pointers and end ncurses window
