@@ -21,13 +21,15 @@ void Array_recursive_remove(Array * a, int i)
 {
     int count = 0;
 
-    for(;i < a->used; i++)
+    for(;i < a->size; i++)
     {
         a->array[i] = NULL;
+        count++;
     }
 
     a->used -= count;
     a->array = realloc(a->array, a->used * sizeof(card *));
+    a->size = a->used;
 }
 
 void Array_deallocate(Array * a)

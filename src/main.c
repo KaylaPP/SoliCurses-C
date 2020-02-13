@@ -10,7 +10,7 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-// Prints gameboard in a grid
+// Prints gameboard in a grid with all values visible
 void debugarray(Array * a);
 
 // Prints out each attribute of every card in deck
@@ -48,6 +48,7 @@ int main(void)
     // Initialize array of type Array with the discard, foundation, and tableau
     Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
+    Array_recursive_remove(&board[T4], 1);
     debugarray(board);
 
     // Free pointers and end ncurses window
