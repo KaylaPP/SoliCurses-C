@@ -7,9 +7,9 @@
 
 typedef struct
 {
-    bool r; // Card revealed or not
-    suit s; // Suit of card
-    value v;// Value of card
+    bool r;  // Card revealed or not
+    suit s;  // Suit of card
+    value v; // Value of card
 } card;
 
 // Constructor method for a card

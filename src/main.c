@@ -1,4 +1,4 @@
-//#define SOLICURSES_DEBUG
+#define SOLICURSES_DEBUG
 
 #include <curses.h>
 #include <stdbool.h>
@@ -64,7 +64,7 @@ void debugarray(Array * a)
     {
         for(int j = 0; j < a[i].used; j++)
         {
-            printf("%i s\t%i v\t%i r||\t", a[i].array[j]->s, a[i].array[j]->v, a[i].array[j]->r);
+            printf("%is\t%iv\t%ir|\t", a[i].array[j]->s, a[i].array[j]->v, a[i].array[j]->r);
         }
         printf("\n");
     }
