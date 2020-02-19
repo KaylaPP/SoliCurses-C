@@ -3,7 +3,6 @@
 
 typedef enum
 {
-    V_PH, // value placeholder
     Ace,
     Two,
     Three,

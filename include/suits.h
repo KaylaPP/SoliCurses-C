@@ -3,11 +3,10 @@
 
 typedef enum
 {
-    S_PH, // suit placeholder
+    Spade,
     Club,
     Diamond,
-    Heart,
-    Spade
+    Heart
 } suit; // Suit of a card
 
 #endif

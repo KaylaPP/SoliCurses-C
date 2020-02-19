@@ -10,6 +10,10 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
+// The symbols for card suits in unicode format for UTF-8
+static const char suit_ch[4][4] =
+{{0xE2, 0x99, 0xA0, '\0'}, {0xE2, 0x99, 0xA3, '\0'}, {0xE2, 0x99, 0xA6, '\0'}, {0xE2, 0x99, 0xA5, '\0'}};
+
 // Prints gameboard in a grid with all values visible
 void debugarray(Array * a);
 
@@ -65,7 +69,7 @@ void debugarray(Array * a)
     {
         for(int j = 0; j < a[i].used; j++)
         {
-            printf("%is\t%iv\t%ir|\t", a[i].array[j]->s, a[i].array[j]->v, a[i].array[j]->r);
+            printf("%is%s\t%iv\t%ir|\t", a[i].array[j]->s, suit_ch[a[i].array[j]->s], a[i].array[j]->v, a[i].array[j]->r);
         }
         printf("\n");
     }
@@ -112,7 +116,7 @@ void initarray(Array * a, card * deck)
 
 void initcards(card * deck)
 {
-    for(int s = Club, i = 0; s <= Spade; s++)
+    for(int s = Spade, i = 0; s <= Heart; s++)
     {
         for(int v = Ace; v <= King; v++, i++)
         {
