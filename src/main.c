@@ -1,6 +1,7 @@
 #define SOLICURSES_DEBUG
 
 #include <curses.h>
+#include <locale.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
@@ -10,9 +11,14 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-// The symbols for card suits in unicode format for UTF-8
+// The unicode characters for card suits in UTF-8 encoding
 static const char suit_ch[4][4] =
-{{0xE2, 0x99, 0xA0, '\0'}, {0xE2, 0x99, 0xA3, '\0'}, {0xE2, 0x99, 0xA6, '\0'}, {0xE2, 0x99, 0xA5, '\0'}};
+{
+    {0xE2, 0x99, 0xA0, '\0'}, // Spade
+    {0xE2, 0x99, 0xA3, '\0'}, // Club
+    {0xE2, 0x99, 0xA6, '\0'}, // Diamond
+    {0xE2, 0x99, 0xA5, '\0'}  // Heart
+};
 
 // Prints gameboard in a grid with all values visible
 void debugarray(Array * a);
@@ -40,6 +46,10 @@ int main(void)
     // Create random seed from computer time
     srand(time(NULL));
 
+    // Sets locale for printing unicode chars/strings
+    setlocale(LC_ALL, "");
+
+    // Applies predefined ncurses attributes
     startcurses();
 
     // Create 52 unique cards and a placholder
@@ -54,8 +64,15 @@ int main(void)
     initarray(board, cardobjs);
     Array_recursive_remove(&board[T4], -1);
     debugarray(board);
+    refresh();
 
     // Free pointers and end ncurses window
+    char input;
+    do
+    {
+        input = getch();
+    } while (input == ERR);
+
     endwin();
     freearray(board);
 
@@ -69,9 +86,9 @@ void debugarray(Array * a)
     {
         for(int j = 0; j < a[i].used; j++)
         {
-            printf("%is%s\t%iv\t%ir|\t", a[i].array[j]->s, suit_ch[a[i].array[j]->s], a[i].array[j]->v, a[i].array[j]->r);
+            printw("%is%s\t%iv\t%ir|\t", a[i].array[j]->s, suit_ch[a[i].array[j]->s], a[i].array[j]->v, a[i].array[j]->r);
         }
-        printf("\n");
+        printw("\n");
     }
 #endif
 }
@@ -81,7 +98,7 @@ void debugdeck(card * deck)
 #ifdef SOLICURSES_DEBUG
     for(int i = 0; i < 52; i++)
     {
-        printf("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
+        printw("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
     }
 #endif
 }
@@ -140,7 +157,6 @@ void shufflecards(card * deck)
 
 void startcurses(void)
 {
-#ifndef SOLICURSES_DEBUG
     // Initialize curses terminal attributes
     initscr();
     if(has_colors() == FALSE)
@@ -160,5 +176,4 @@ void startcurses(void)
     keypad(stdscr, true);
     noecho();
     halfdelay(1);
-#endif
 }
