@@ -15,8 +15,8 @@
 static const char suit_ch[4][4] =
 {
     {0xE2, 0x99, 0xA0, '\0'}, // Spade
-    {0xE2, 0x99, 0xA3, '\0'}, // Club
     {0xE2, 0x99, 0xA6, '\0'}, // Diamond
+    {0xE2, 0x99, 0xA3, '\0'}, // Club
     {0xE2, 0x99, 0xA5, '\0'}  // Heart
 };
 
@@ -62,7 +62,6 @@ int main(void)
     // Initialize array of type Array with the discard, foundation, and tableau
     Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
-    Array_recursive_remove(&board[T4], -1);
     debugarray(board);
     refresh();
 
@@ -84,10 +83,14 @@ void debugarray(Array * a)
 #ifdef SOLICURSES_DEBUG
     for(int i = DS; i <= T7; i++)
     {
+        int n = 0;
         for(int j = 0; j < a[i].used; j++)
         {
-            // FUTURE: mvprintw without tabs
-            printw("%is%s\t%iv\t%ir|\t", a[i].array[j]->s, suit_ch[a[i].array[j]->s], a[i].array[j]->v, a[i].array[j]->r);
+            mvprintw(i, n + 0, "%i%s", a[i].array[j]->s, suit_ch[a[i].array[j]->s]); // Suit val and symbol
+            mvprintw(i, n + 2, "%i", a[i].array[j]->v); // Number val
+            mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state
+            mvprintw(i, n + 4, "%i", Card_color(a[i].array[j])); // Card color
+            n += 6;
         }
         printw("\n");
     }
@@ -174,7 +177,7 @@ void startcurses(void)
     start_color();
     
     // Initializes colors
-    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Default white text on black background
+    init_pair(1, COLOR_WHITE, COLOR_GREEN); // Default white text on black background
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));

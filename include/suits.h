@@ -4,8 +4,8 @@
 typedef enum
 {
     Spade,
-    Club,
     Diamond,
+    Club,
     Heart
 } suit; // Suit of a card
 
