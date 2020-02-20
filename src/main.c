@@ -20,7 +20,7 @@ static const char suit_ch[4][4] =
     {0xE2, 0x99, 0xA5, '\0'}  // Heart
 };
 
-// Prints gameboard in a grid with all values visible
+// Prints gameboard in a grid with all attributes visible
 void debugarray(Array * a);
 
 // Prints out each attribute of every card in deck
@@ -29,7 +29,7 @@ void debugdeck(card * deck);
 // Frees gameboard
 void freearray(Array * a);
 
-// Initializes array with 52 cards distributed on the gameboards
+// Initializes array with 52 cards distributed on the gameboard
 void initarray(Array * a, card * deck);
 
 // Adds 52 unique cards to deck
@@ -86,6 +86,7 @@ void debugarray(Array * a)
     {
         for(int j = 0; j < a[i].used; j++)
         {
+            // FUTURE: mvprintw without tabs
             printw("%is%s\t%iv\t%ir|\t", a[i].array[j]->s, suit_ch[a[i].array[j]->s], a[i].array[j]->v, a[i].array[j]->r);
         }
         printw("\n");
@@ -128,6 +129,11 @@ void initarray(Array * a, card * deck)
             Array_append(&a[i], &deck[count++]);
         }
         Card_reveal(Array_last(&a[i]));
+    }
+
+    while(count < 52)
+    {
+        Array_append(&a[DS], &deck[count++]);
     }
 }
 
