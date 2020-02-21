@@ -11,13 +11,13 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-// The unicode characters for card suits in UTF-8 encoding with indices corresponding to enum suit
+// The unicode characters for card suits in UTF-8 encoding with indices corresponding with enum suit
 static const char suit_ch[4][4] =
 {
-    {0xE2, 0x99, 0xA0, '\0'}, // Spade
-    {0xE2, 0x99, 0xA6, '\0'}, // Diamond
-    {0xE2, 0x99, 0xA3, '\0'}, // Club
-    {0xE2, 0x99, 0xA5, '\0'}  // Heart
+    {'\xE2', '\x99', '\xA0', '\0'}, // Spade
+    {'\xE2', '\x99', '\xA6', '\0'}, // Diamond
+    {'\xE2', '\x99', '\xA3', '\0'}, // Club
+    {'\xE2', '\x99', '\xA5', '\0'}  // Heart
 };
 
 // Prints gameboard in a grid with all attributes visible
@@ -177,7 +177,7 @@ static void startcurses(void)
     start_color();
     
     // Initializes color pairs
-    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Default white text on black background
+    init_pair(1, COLOR_WHITE, COLOR_GREEN); // Default white text on black background
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));
