@@ -11,7 +11,7 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-// The unicode characters for card suits in UTF-8 encoding
+// The unicode characters for card suits in UTF-8 encoding with indices corresponding to enum suit
 static const char suit_ch[4][4] =
 {
     {0xE2, 0x99, 0xA0, '\0'}, // Spade
@@ -21,25 +21,25 @@ static const char suit_ch[4][4] =
 };
 
 // Prints gameboard in a grid with all attributes visible
-void debugarray(Array * a);
+static void debugarray(Array * a);
 
 // Prints out each attribute of every card in deck
-void debugdeck(card * deck);
+static void debugdeck(card * deck);
 
 // Frees gameboard
-void freearray(Array * a);
+static void freearray(Array * a);
 
 // Initializes array with 52 cards distributed on the gameboard
-void initarray(Array * a, card * deck);
+static void initarray(Array * a, card * deck);
 
 // Adds 52 unique cards to deck
-void initcards(card * deck);
+static void initcards(card * deck);
 
 // Randomizes the order of the cards in deck
-void shufflecards(card * deck);
+static void shufflecards(card * deck);
 
 // Activates all attributes for the terminal using ncurses
-void startcurses(void);
+static void startcurses(void);
 
 int main(void)
 {
@@ -78,7 +78,7 @@ int main(void)
     return 0;
 }
 
-void debugarray(Array * a)
+static void debugarray(Array * a)
 {
 #ifdef SOLICURSES_DEBUG
     for(int i = DS; i <= T7; i++)
@@ -88,16 +88,16 @@ void debugarray(Array * a)
         {
             mvprintw(i, n + 0, "%i%s", a[i].array[j]->s, suit_ch[a[i].array[j]->s]); // Suit val and symbol
             mvprintw(i, n + 2, "%i", a[i].array[j]->v); // Number val
-            mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state
-            mvprintw(i, n + 4, "%i", Card_color(a[i].array[j])); // Card color
-            n += 6;
+            mvprintw(i, n + 5, "%i", a[i].array[j]->r); // Reveal state
+            mvprintw(i, n + 6, "%i|", Card_color(a[i].array[j])); // Card color
+            n += 8;
         }
         printw("\n");
     }
 #endif
 }
 
-void debugdeck(card * deck)
+static void debugdeck(card * deck)
 {
 #ifdef SOLICURSES_DEBUG
     for(int i = 0; i < 52; i++)
@@ -107,7 +107,7 @@ void debugdeck(card * deck)
 #endif
 }
 
-void freearray(Array * a)
+static void freearray(Array * a)
 {
     for(int i = DS; i <= T7; i++)
     {
@@ -116,7 +116,7 @@ void freearray(Array * a)
     free(a);
 }
 
-void initarray(Array * a, card * deck)
+static void initarray(Array * a, card * deck)
 {
     int count = 0;
 
@@ -140,7 +140,7 @@ void initarray(Array * a, card * deck)
     }
 }
 
-void initcards(card * deck)
+static void initcards(card * deck)
 {
     for(int s = Spade, i = 0; s <= Heart; s++)
     {
@@ -151,7 +151,7 @@ void initcards(card * deck)
     }
 }
 
-void shufflecards(card * deck)
+static void shufflecards(card * deck)
 {
     for(int i = 0; i < 52; i++)
     {
@@ -164,7 +164,7 @@ void shufflecards(card * deck)
     }
 }
 
-void startcurses(void)
+static void startcurses(void)
 {
     // Initialize curses terminal attributes
     initscr();
@@ -176,8 +176,8 @@ void startcurses(void)
     }
     start_color();
     
-    // Initializes colors
-    init_pair(1, COLOR_WHITE, COLOR_GREEN); // Default white text on black background
+    // Initializes color pairs
+    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Default white text on black background
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));
