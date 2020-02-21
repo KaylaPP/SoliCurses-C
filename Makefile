@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-pthread -c -g
+CFLAGS=-pthread -c -g -pedantic
 LDFLAGS=-lncurses
 EXECUTABLE=./SoliCurses-C.out
 SRCDIR=./src
