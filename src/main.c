@@ -87,10 +87,10 @@ static void debugarray(Array * a)
         for(int j = 0; j < a[i].used; j++)
         {
             mvprintw(i, n + 0, "%i%s", a[i].array[j]->s, suit_ch[a[i].array[j]->s]); // Suit val and symbol
-            mvprintw(i, n + 2, "%i", a[i].array[j]->v); // Number val
-            mvprintw(i, n + 5, "%i", a[i].array[j]->r); // Reveal state
-            mvprintw(i, n + 6, "%i|", Card_color(a[i].array[j])); // Card color
-            n += 8;
+            mvprintw(i, n + 2, "%x", a[i].array[j]->v); // Number val
+            mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state
+            mvprintw(i, n + 4, "%i|", Card_color(a[i].array[j])); // Card color
+            n += 6;
         }
         printw("\n");
     }
