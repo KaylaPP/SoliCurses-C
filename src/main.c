@@ -11,7 +11,7 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
-// The unicode characters for card suits in UTF-8 encoding with indices corresponding with enum suit
+// The unicode characters for card suits in UTF-8 encoding with indices corresponding to enum suit
 static const char suit_ch[4][4] =
 {
     {'\xE2', '\x99', '\xA0', '\0'}, // Spade
@@ -22,9 +22,6 @@ static const char suit_ch[4][4] =
 
 // Prints gameboard in a grid with all attributes visible
 static void debugarray(Array * a);
-
-// Prints out each attribute of every card in deck
-static void debugdeck(card * deck);
 
 // Frees gameboard
 static void freearray(Array * a);
@@ -93,16 +90,6 @@ static void debugarray(Array * a)
             n += 6;
         }
         printw("\n");
-    }
-#endif
-}
-
-static void debugdeck(card * deck)
-{
-#ifdef SOLICURSES_DEBUG
-    for(int i = 0; i < 52; i++)
-    {
-        printw("%i %i %i\n", deck[i].s, deck[i].v, deck[i].r);
     }
 #endif
 }
@@ -177,7 +164,7 @@ static void startcurses(void)
     start_color();
     
     // Initializes color pairs
-    init_pair(1, COLOR_WHITE, COLOR_GREEN); // Default white text on black background
+    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Default white text on black background
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));
