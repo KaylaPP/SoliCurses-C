@@ -1,5 +1,3 @@
-#define SOLICURSES_DEBUG
-
 #include <curses.h>
 #include <locale.h>
 #include <stdbool.h>
@@ -8,17 +6,10 @@
 #include "../include/array.h"
 #include "../include/board.h"
 #include "../include/card.h"
+#include "../include/consts.h"
+#include "../include/gb.h"
 #include "../include/suits.h"
 #include "../include/values.h"
-
-// The unicode characters for card suits in UTF-8 encoding with indices corresponding to enum suit
-static const char suit_ch[4][4] =
-{
-    {'\xE2', '\x99', '\xA0', '\0'}, // Spade
-    {'\xE2', '\x99', '\xA6', '\0'}, // Diamond
-    {'\xE2', '\x99', '\xA3', '\0'}, // Club
-    {'\xE2', '\x99', '\xA5', '\0'}  // Heart
-};
 
 // Prints gameboard in a grid with all attributes visible
 static void debugarray(Array * a);
@@ -77,7 +68,6 @@ int main(void)
 
 static void debugarray(Array * a)
 {
-#ifdef SOLICURSES_DEBUG
     for(int i = DS; i <= T7; i++)
     {
         int n = 0;
@@ -91,7 +81,6 @@ static void debugarray(Array * a)
         }
         printw("\n");
     }
-#endif
 }
 
 static void freearray(Array * a)
