@@ -1,11 +1,18 @@
 #pragma once
 
+#include "direction.h"
+
+// Cursors with a range of [0, xmax] or [0, ymax] (inclusive)
 typedef struct 
 {
-    int x;
     int y;
-    int xmax;
+    int x;
     int ymax;
-} Cursor;
+    int xmax;
+} cursor;
 
-void Cursor_init(Cursor * c);
+// Initialize cursor
+void Cursor_init(cursor * c, int ym, int xm);
+
+// Move cursor in a specific direction
+void Cursor_move(cursor * c, direction d);

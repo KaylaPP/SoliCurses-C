@@ -3,7 +3,10 @@
 #include "array.h"
 #include "card.h"
 #include "color.h"
+#include "cursor.h"
 
-void printGB(Array * gb);
+void getInput(Array * gb);
+
+void printGB(Array * gb, cursor * c);
 
 void refreshGB(Array * gb);

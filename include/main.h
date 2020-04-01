@@ -14,19 +14,19 @@
 #include "values.h"
 
 // Prints gameboard in a grid with all attributes visible
-void debugarray(Array* a);
+void debugarray(Array * a);
 
 // Frees gameboard
-void freearray(Array* a);
+void freearray(Array * a);
 
 // Initializes array with 52 cards distributed on the gameboard
-void initarray(Array* a, card* deck);
+void initarray(Array * a, card * deck);
 
 // Adds 52 unique cards to deck
-void initcards(card* deck);
+void initcards(card * deck);
 
 // Randomizes the order of the cards in deck
-void shufflecards(card* deck);
+void shufflecards(card * deck);
 
 // Activates all attributes for the terminal using ncurses
 void startcurses(void);
