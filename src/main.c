@@ -48,7 +48,7 @@ void debugarray(Array * a)
 #ifndef _MSVC_TRADITIONAL
             mvprintw(i, n + 1, "%s", suit_ch[a[i].array[j]->s]); // Suit symbol
 #else
-            mvprintw(i, n + 1, "%lc", suit_ch[a[i].array[j]->s]); // Suit symbol
+            mvaddwstr(i, n + 1, suit_ch[a[i].array[j]->s]); // Suit symbol
 #endif
             mvprintw(i, n + 2, "%x", a[i].array[j]->v); // Number val
             mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state

@@ -3,9 +3,11 @@
 #ifndef _MSVC_TRADITIONAL
 #define SETLOCALE() setlocale(LC_ALL, "")
 #else
-#define SETLOCALE() setlocale(LC_CTYPE, "");
+#include <wchar.h>
+#include <io.h>
+#include <fcntl.h>
+#define SETLOCALE() _setmode(_fileno(stdout), _O_U16TEXT);
 #endif
-
 
 #include <curses.h>
 #include <locale.h>

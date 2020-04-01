@@ -15,12 +15,12 @@ const char suit_ch[4][4] =
 #else
 
 #include <wchar.h>
-const wchar_t suit_ch[4] =
+const wchar_t suit_ch[4][2] =
 {
-    L'♠', // Spade
-    L'♦', // Diamond
-    L'♣', // Club
-    L'♥'  // Heart
+    L"♠", // Spade
+    L"♦", // Diamond
+    L"♣", // Club
+    L"♥"  // Heart
 };
 
 #endif
