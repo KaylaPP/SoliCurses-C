@@ -6,7 +6,7 @@ int main(void)
     srand(time(NULL));
 
     // Sets locale for printing unicode chars/strings
-    SETLOCALE();
+    setlocale(LC_ALL, "");
 
     // Applies predefined ncurses attributes
     startcurses();

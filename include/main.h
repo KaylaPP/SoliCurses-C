@@ -1,14 +1,5 @@
 #pragma once
 
-#ifndef _MSVC_TRADITIONAL
-#define SETLOCALE() setlocale(LC_ALL, "")
-#else
-#include <wchar.h>
-#include <io.h>
-#include <fcntl.h>
-#define SETLOCALE() _setmode(_fileno(stdout), _O_U16TEXT);
-#endif
-
 #include <curses.h>
 #include <locale.h>
 #include <stdbool.h>
