@@ -1,9 +1,7 @@
 ﻿#pragma once
 
-// Strings that represent difference UTF-8 characters for card suits
-
 #ifndef _MSVC_TRADITIONAL
-
+// Strings that represent different UTF-8 characters for card suits
 const char suit_ch[4][4] =
 {
     {'\xE2', '\x99', '\xA0', '\0'}, // Spade
@@ -15,6 +13,7 @@ const char suit_ch[4][4] =
 #else
 
 #include <wchar.h>
+// Strings that represent different UTF-16 characters for card suits
 const wchar_t suit_ch[4][2] =
 {
     L"♠", // Spade
