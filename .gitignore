@@ -56,3 +56,6 @@ dkms.conf
 
 # Vim swap files
 *~
+
+# Files with ideas/examples for the developer only
+*.igno
