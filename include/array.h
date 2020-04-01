@@ -1,5 +1,4 @@
-#ifndef ARRAY_H
-    #define ARRAY_H
+#pragma once
 
 #include "card.h"
 
@@ -25,5 +24,3 @@ void Array_init(Array * a, size_t initsize);
 
 // Removes all elements in an array following and including index i
 void Array_recursive_remove(Array * a, int i);
-
-#endif

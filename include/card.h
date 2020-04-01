@@ -1,5 +1,4 @@
-#ifndef CARD_H
-    #define CARD_H
+#pragma once
 
 #include <stdbool.h>
 #include "color.h"
@@ -20,5 +19,3 @@ void Card_init(card * c, bool revealed, suit newsuit, value newvalue);
 
 // Reveals a card irreversibly by setting c.r equal to true
 void Card_reveal(card * c);
-
-#endif

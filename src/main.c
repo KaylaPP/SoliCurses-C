@@ -1,33 +1,4 @@
-#include <curses.h>
-#include <locale.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <time.h>
-#include "../include/array.h"
-#include "../include/board.h"
-#include "../include/card.h"
-#include "../include/consts.h"
-#include "../include/gb.h"
-#include "../include/suits.h"
-#include "../include/values.h"
-
-// Prints gameboard in a grid with all attributes visible
-static void debugarray(Array * a);
-
-// Frees gameboard
-static void freearray(Array * a);
-
-// Initializes array with 52 cards distributed on the gameboard
-static void initarray(Array * a, card * deck);
-
-// Adds 52 unique cards to deck
-static void initcards(card * deck);
-
-// Randomizes the order of the cards in deck
-static void shufflecards(card * deck);
-
-// Activates all attributes for the terminal using ncurses
-static void startcurses(void);
+#include "../include/main.h"
 
 int main(void)
 {
@@ -35,7 +6,7 @@ int main(void)
     srand(time(NULL));
 
     // Sets locale for printing unicode chars/strings
-    setlocale(LC_ALL, "");
+    SETLOCALE();
 
     // Applies predefined ncurses attributes
     startcurses();
@@ -66,14 +37,19 @@ int main(void)
     return 0;
 }
 
-static void debugarray(Array * a)
+void debugarray(Array * a)
 {
     for(int i = DS; i <= T7; i++)
     {
         int n = 0;
         for(int j = 0; j < a[i].used; j++)
         {
-            mvprintw(i, n + 0, "%i%s", a[i].array[j]->s, suit_ch[a[i].array[j]->s]); // Suit val and symbol
+            mvprintw(i, n + 0, "%i", a[i].array[j]->s); // Suit val
+#ifndef _MSVC_TRADITIONAL
+            mvprintw(i, n + 1, "%s", suit_ch[a[i].array[j]->s]); // Suit symbol
+#else
+            mvprintw(i, n + 1, "%lc", suit_ch[a[i].array[j]->s]); // Suit symbol
+#endif
             mvprintw(i, n + 2, "%x", a[i].array[j]->v); // Number val
             mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state
             mvprintw(i, n + 4, "%i|", Card_color(a[i].array[j])); // Card color
@@ -83,7 +59,7 @@ static void debugarray(Array * a)
     }
 }
 
-static void freearray(Array * a)
+void freearray(Array * a)
 {
     for(int i = DS; i <= T7; i++)
     {
@@ -92,7 +68,7 @@ static void freearray(Array * a)
     free(a);
 }
 
-static void initarray(Array * a, card * deck)
+void initarray(Array * a, card * deck)
 {
     int count = 0;
 
@@ -116,7 +92,7 @@ static void initarray(Array * a, card * deck)
     }
 }
 
-static void initcards(card * deck)
+void initcards(card * deck)
 {
     for(int s = Spade, i = 0; s <= Heart; s++)
     {
@@ -127,7 +103,7 @@ static void initcards(card * deck)
     }
 }
 
-static void shufflecards(card * deck)
+void shufflecards(card * deck)
 {
     for(int i = 0; i < 52; i++)
     {
@@ -140,7 +116,7 @@ static void shufflecards(card * deck)
     }
 }
 
-static void startcurses(void)
+void startcurses(void)
 {
     // Initialize curses terminal attributes
     initscr();

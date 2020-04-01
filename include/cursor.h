@@ -1,5 +1,4 @@
-#ifndef CURSOR_H
-    #define CURSOR_H
+#pragma once
 
 typedef struct 
 {
@@ -10,5 +9,3 @@ typedef struct
 } Cursor;
 
 void Cursor_init(Cursor * c);
-
-#endif

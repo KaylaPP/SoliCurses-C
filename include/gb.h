@@ -1,5 +1,4 @@
-#ifndef GB_H
-    #define GB_H
+#pragma once
 
 #include "array.h"
 #include "card.h"
@@ -8,5 +7,3 @@
 void printGB(Array * gb);
 
 void refreshGB(Array * gb);
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SUIT_H
-    #define SUIT_H
+#pragma once
 
 typedef enum
 {
@@ -8,5 +7,3 @@ typedef enum
     Club,
     Heart
 } suit; // Suit of a card
-
-#endif

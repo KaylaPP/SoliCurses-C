@@ -1,10 +1,7 @@
-#ifndef COLOR_H
-    #define COLOR_H
+#pragma once
 
 typedef enum
 {
     black,
     red
 } color;
-
-#endif

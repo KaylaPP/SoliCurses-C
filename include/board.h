@@ -1,5 +1,4 @@
-#ifndef BOARD_H
-    #define BOARD_H
+#pragma once
 
 typedef enum
 {
@@ -16,5 +15,3 @@ typedef enum
     T6,
     T7
 } pile;
-
-#endif
