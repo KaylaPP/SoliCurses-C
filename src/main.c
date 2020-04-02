@@ -24,13 +24,9 @@ int main(void)
     debugarray(board);
     refresh();
 
-    // Free pointers and end ncurses window
-    char input;
-    do
-    {
-        input = getch();
-    } while (input == ERR);
+    getinput();
 
+    // Free pointers and end ncurses window
     endwin();
     freearray(board);
 
@@ -66,6 +62,17 @@ void freearray(Array * a)
         Array_deallocate(&a[i]);
     }
     free(a);
+}
+
+char getinput()
+{
+    char input;
+    do
+    {
+        input = getch();
+    } while(input == ERR);
+
+    return input;
 }
 
 void initarray(Array * a, card * deck)

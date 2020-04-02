@@ -19,6 +19,9 @@ void debugarray(Array * a);
 // Frees gameboard
 void freearray(Array * a);
 
+// Gets user input
+char getinput();
+
 // Initializes array with 52 cards distributed on the gameboard
 void initarray(Array * a, card * deck);
 

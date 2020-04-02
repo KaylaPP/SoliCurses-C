@@ -1,11 +1,10 @@
 #pragma once
 
 #include "array.h"
+#include "board.h"
 #include "card.h"
 #include "color.h"
 #include "cursor.h"
-
-void getInput(Array * gb);
 
 void printGB(Array * gb, cursor * c);
 
