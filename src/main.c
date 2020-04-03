@@ -8,10 +8,10 @@ int main(void)
     // Sets locale for printing unicode chars/strings
     setlocale(LC_ALL, "");
 
-    // Applies predefined ncurses attributes
+    // Applies predefined curses attributes
     startcurses();
 
-    // Create 52 unique cards and a placholder
+    // Create 52 unique cards
     card cardobjs[52];
     initcards(cardobjs);
 

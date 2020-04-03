@@ -2,7 +2,7 @@
 
 #include "direction.h"
 
-// Cursors with a range of [0, xmax] or [0, ymax] (inclusive)
+// Cursors with a range of [0, xmax] or [0, ymax] [inclusive]
 typedef struct 
 {
     int y;

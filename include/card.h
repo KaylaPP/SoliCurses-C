@@ -14,8 +14,11 @@ typedef struct
 
 color Card_color(card * c);
 
+// Hides a card by setting c->r to false
+void Card_hide(card * c);
+
 // Constructor method for a card
 void Card_init(card * c, bool revealed, suit newsuit, value newvalue);
 
-// Reveals a card irreversibly by setting c.r equal to true
+// Reveals a card by setting c->r to true
 void Card_reveal(card * c);

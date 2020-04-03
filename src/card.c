@@ -5,6 +5,11 @@ color Card_color(card * c)
     return c->s % 2;
 }
 
+void Card_hide(card * c)
+{
+    c->r = false;
+}
+
 void Card_init(card * c, bool revealed, suit newsuit, value newvalue)
 {
     c->s = newsuit;

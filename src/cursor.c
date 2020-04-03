@@ -11,8 +11,6 @@ void Cursor_move(cursor * c, direction d)
 {
     switch(d)
     {
-    default:
-        break;
     case up:
         c->y--;
         if(c->y < 0)
@@ -32,5 +30,8 @@ void Cursor_move(cursor * c, direction d)
         c->x++;
         if(c->x > c->xmax)
             c->x = c->xmax;
+        break;
+    default:
+        break;
     }
 }
