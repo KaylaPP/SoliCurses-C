@@ -2,7 +2,7 @@
 
 #ifndef _MSVC_TRADITIONAL
 // Strings that represent different UTF-8 characters for card suits
-const char suit_ch[4][4] =
+static const char suit_ch[4][4] =
 {
     {'\xE2', '\x99', '\xA0', '\0'}, // Spade
     {'\xE2', '\x99', '\xA6', '\0'}, // Diamond
@@ -14,7 +14,7 @@ const char suit_ch[4][4] =
 
 #include <wchar.h>
 // Strings that represent different UTF-16 characters for card suits
-const wchar_t suit_ch[4][2] =
+static const wchar_t suit_ch[4][2] =
 {
     L"♠", // Spade
     L"♦", // Diamond

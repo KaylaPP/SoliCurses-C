@@ -6,6 +6,6 @@
 #include "color.h"
 #include "cursor.h"
 
-void printGB(Array * gb, cursor * c);
+void printGB(Array * gb, Cursor * c);
 
 void refreshGB(Array * gb);

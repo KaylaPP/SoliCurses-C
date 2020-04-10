@@ -1,13 +1,13 @@
 #include "../include/cursor.h"
 #include "../include/direction.h"
 
-void Cursor_init(cursor * c, int ym, int xm)
+void Cursor_init(Cursor * c, int ym, int xm)
 {
     c->ymax = ym;
     c->xmax = xm;
 }
 
-void Cursor_move(cursor * c, direction d)
+void Cursor_move(Cursor * c, direction d)
 {
     switch(d)
     {

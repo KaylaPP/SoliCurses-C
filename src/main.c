@@ -1,5 +1,26 @@
 #include "../include/main.h"
 
+// Gets user input
+static char getinput(void);
+
+// Prints gameboard in a grid with all attributes visible
+static void debugarray(Array * a);
+
+// Frees gameboard
+static void freearray(Array * a);
+
+// Initializes array with 52 cards distributed on the gameboard
+static void initarray(Array * a, card * deck);
+
+// Adds 52 unique cards to deck
+static void initcards(card * deck);
+
+// Randomizes the order of the cards in deck
+static void shufflecards(card * deck);
+
+// Activates all attributes for the terminal using ncurses
+static void startcurses(void);
+
 int main(void)
 {
     // Create random seed from computer time
@@ -21,7 +42,12 @@ int main(void)
     // Initialize array of type Array with the discard, foundation, and tableau
     Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
-    debugarray(board);
+
+    // Initialize cursor
+    Cursor cursor;
+    Cursor_init(&cursor, 0, 0);
+
+    printGB(board, &cursor);
     refresh();
 
     getinput();
@@ -33,7 +59,18 @@ int main(void)
     return 0;
 }
 
-void debugarray(Array * a)
+static char getinput(void)
+{
+    char input;
+    do
+    {
+        input = getch();
+    } while(input == ERR);
+
+    return input;
+}
+
+static void debugarray(Array * a)
 {
     for(int i = DS; i <= T7; i++)
     {
@@ -55,7 +92,7 @@ void debugarray(Array * a)
     }
 }
 
-void freearray(Array * a)
+static void freearray(Array * a)
 {
     for(int i = DS; i <= T7; i++)
     {
@@ -64,18 +101,7 @@ void freearray(Array * a)
     free(a);
 }
 
-char getinput()
-{
-    char input;
-    do
-    {
-        input = getch();
-    } while(input == ERR);
-
-    return input;
-}
-
-void initarray(Array * a, card * deck)
+static void initarray(Array * a, card * deck)
 {
     int count = 0;
 
@@ -99,7 +125,7 @@ void initarray(Array * a, card * deck)
     }
 }
 
-void initcards(card * deck)
+static void initcards(card * deck)
 {
     for(int s = Spade, i = 0; s <= Heart; s++)
     {
@@ -110,7 +136,7 @@ void initcards(card * deck)
     }
 }
 
-void shufflecards(card * deck)
+static void shufflecards(card * deck)
 {
     for(int i = 0; i < 52; i++)
     {
@@ -123,7 +149,7 @@ void shufflecards(card * deck)
     }
 }
 
-void startcurses(void)
+static void startcurses(void)
 {
     // Initialize curses terminal attributes
     initscr();
@@ -136,7 +162,9 @@ void startcurses(void)
     start_color();
     
     // Initializes color pairs
-    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Default white text on black background
+    init_pair(1, COLOR_GREEN, COLOR_GREEN); // Default green background + text
+    init_pair(2, COLOR_RED, COLOR_WHITE);   // Red text on white background
+    init_pair(3, COLOR_BLACK, COLOR_WHITE);  // Black text on white background
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));

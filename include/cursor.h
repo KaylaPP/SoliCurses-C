@@ -9,10 +9,10 @@ typedef struct
     int x;
     int ymax;
     int xmax;
-} cursor;
+} Cursor;
 
 // Initialize cursor
-void Cursor_init(cursor * c, int ym, int xm);
+void Cursor_init(Cursor * c, int ym, int xm);
 
 // Move cursor in a specific direction
-void Cursor_move(cursor * c, direction d);
+void Cursor_move(Cursor * c, direction d);
