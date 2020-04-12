@@ -2,23 +2,37 @@
 #include "../include/consts.h"
 #include "../include/gb.h"
 
-static void printBackground()
+static const char val_ch[3] =
 {
-    attroff(COLOR_PAIR(1));
-    attron(COLOR_PAIR(2));
-    for(int y = 0; y < 1; y++)
+    'J',
+    'Q',
+    'K'
+};
+
+static void printBackground(void)
+{
+    attroff(COLOR_PAIR(2));
+    attron(COLOR_PAIR(1));
+    for(int y = 0; y < 100; y++)
     {
-        for(int x = 0; x < 1; x++)
+        for(int x = 0; x < 1000; x++)
         {
-            break;
+            mvprintw(y, x, " ");
         }
     }
-    attroff(COLOR_PAIR(1));
-    attron(COLOR_PAIR(2));
+    attroff(COLOR_PAIR(2));
+    attron(COLOR_PAIR(1));
 }
 
 static void printCard(int y, int x, card * c)
 {
+#ifdef RANDOMSTRINGOFLETTERS
+    if(!c->r) // If card is not revealed
+    {
+        printHiddenCard(y, x);
+        return;
+    }
+#endif
     int color;
     if(Card_color(c) == black)
         color = 3;
@@ -29,7 +43,7 @@ static void printCard(int y, int x, card * c)
     attroff(COLOR_PAIR(1));
     attron(COLOR_PAIR(color));
 
-    // Print white background
+    // Print white card background
     for(int yc = y; yc < y + 8; yc++)
     {
         for(int xc = x; xc < x + 10; xc++)
@@ -38,29 +52,59 @@ static void printCard(int y, int x, card * c)
         }
     }
 
-    // Print card suit symbol and card value
+    // Print card suit symbol
 #ifdef _MSVC_TRADITIONAL
     mvaddwstr(y, x, suit_ch[c->s]);
-    if(c->v < 10)
-        mvprintw(y, x + 9, "%i", c->v);
-    else
-        mvprintw(y, x + 8, "%i", c->v);
     mvaddwstr(y + 7, x + 9, suit_ch[c->s]);
-    mvprintw(y + 7, x, "%i", c->v);
 #else
     mvprintw(y, x, "%s", suit_ch[c->s]);
-    mvprintw(y, x + 9, "%i", c->v);
     mvprintw(y + 7, x + 9, "%s", suit_ch[c->s]);
-    mvprintw(y + 7, x, "%i", c->v);
 #endif
+    // Print card value
+    if(c->v == Ace)
+    {
+        mvprintw(y, x + 9, "A");
+        mvprintw(y + 7, x, "A");
+    }
+    else if(c->v >= Two && c->v < Ten)
+    {
+        mvprintw(y, x + 9, "%i", c->v + 1);
+        mvprintw(y + 7, x, "%i", c->v + 1);
+    }
+    else if(c->v == Ten)
+    {
+        mvprintw(y, x + 8, "10");
+        mvprintw(y + 7, x, "10");
+    }
+    else if(c->v >= Jack)
+    {
+        mvprintw(y, x + 9, "%c", val_ch[c->v - Jack]);
+        mvprintw(y + 7, x, "%c", val_ch[c->v - Jack]);
+    }
 
     // Remove color attributes
     attroff(COLOR_PAIR(color));
     attron(COLOR_PAIR(1));
 }
 
+static void printHiddenCard(int y, int x)
+{
+    attroff(COLOR_PAIR(1));
+    attron(COLOR_PAIR(4));
+    for(int yc = y; yc < y + 7; yc++)
+    {
+        for(int xc = x; xc < x + 9; xc++)
+        {
+            mvprintw(yc, xc, " ");
+        }
+    }
+    attron(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(4));
+}
+
 void printGB(Array * gb, Cursor * c)
 {
+    printBackground();
     printCard(2, 4, gb[0].array[0]);
 }
 

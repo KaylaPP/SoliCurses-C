@@ -1,10 +1,19 @@
-#include "../include/main.h"
+#include <curses.h>
+#include <locale.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+#include "../include/array.h"
+#include "../include/board.h"
+#include "../include/card.h"
+#include "../include/consts.h"
+#include "../include/cursor.h"
+#include "../include/gb.h"
+#include "../include/suits.h"
+#include "../include/values.h"
 
 // Gets user input
 static char getinput(void);
-
-// Prints gameboard in a grid with all attributes visible
-static void debugarray(Array * a);
 
 // Frees gameboard
 static void freearray(Array * a);
@@ -49,7 +58,6 @@ int main(void)
 
     printGB(board, &cursor);
     refresh();
-
     getinput();
 
     // Free pointers and end ncurses window
@@ -68,28 +76,6 @@ static char getinput(void)
     } while(input == ERR);
 
     return input;
-}
-
-static void debugarray(Array * a)
-{
-    for(int i = DS; i <= T7; i++)
-    {
-        int n = 0;
-        for(int j = 0; j < a[i].used; j++)
-        {
-            mvprintw(i, n + 0, "%i", a[i].array[j]->s); // Suit val
-#ifndef _MSVC_TRADITIONAL
-            mvprintw(i, n + 1, "%s", suit_ch[a[i].array[j]->s]); // Suit symbol
-#else
-            mvaddwstr(i, n + 1, suit_ch[a[i].array[j]->s]); // Suit symbol
-#endif
-            mvprintw(i, n + 2, "%x", a[i].array[j]->v); // Number val
-            mvprintw(i, n + 3, "%i", a[i].array[j]->r); // Reveal state
-            mvprintw(i, n + 4, "%i|", Card_color(a[i].array[j])); // Card color
-            n += 6;
-        }
-        printw("\n");
-    }
 }
 
 static void freearray(Array * a)
@@ -162,9 +148,13 @@ static void startcurses(void)
     start_color();
     
     // Initializes color pairs
-    init_pair(1, COLOR_GREEN, COLOR_GREEN); // Default green background + text
+    init_pair(1, COLOR_GREEN, COLOR_GREEN); // Default green background
     init_pair(2, COLOR_RED, COLOR_WHITE);   // Red text on white background
     init_pair(3, COLOR_BLACK, COLOR_WHITE);  // Black text on white background
+    init_pair(4, COLOR_BLUE, COLOR_BLUE); // Blue background for hidden cards
+    init_pair(5, COLOR_RED, COLOR_YELLOW);   // Red text on yellow background
+    init_pair(6, COLOR_BLACK, COLOR_YELLOW);  // Black text on yellow background
+
 
     // Apply default color mode and apply ncurses window attributes
     attron(COLOR_PAIR(1));
