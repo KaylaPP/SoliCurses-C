@@ -26,7 +26,7 @@ static void printBackground(void)
 
 static void printCard(int y, int x, card * c)
 {
-#ifdef RANDOMSTRINGOFLETTERS
+#ifndef RANDOMSTRINGOFLETTERS
     if(!c->r) // If card is not revealed
     {
         printHiddenCard(y, x);
@@ -40,7 +40,6 @@ static void printCard(int y, int x, card * c)
         color = 2;
 
     // Apply color attributes
-    attroff(COLOR_PAIR(1));
     attron(COLOR_PAIR(color));
 
     // Print white card background
@@ -51,6 +50,8 @@ static void printCard(int y, int x, card * c)
             mvprintw(yc, xc, " ");
         }
     }
+
+    attron(COLOR_PAIR(color + 5));
 
     // Print card suit symbol
 #ifdef _MSVC_TRADITIONAL
@@ -83,29 +84,36 @@ static void printCard(int y, int x, card * c)
     }
 
     // Remove color attributes
-    attroff(COLOR_PAIR(color));
     attron(COLOR_PAIR(1));
 }
 
 static void printHiddenCard(int y, int x)
 {
-    attroff(COLOR_PAIR(1));
-    attron(COLOR_PAIR(4));
-    for(int yc = y; yc < y + 7; yc++)
+    attron(COLOR_PAIR(3));
+    for(int yc = y; yc < y + 8; yc++)
     {
-        for(int xc = x; xc < x + 9; xc++)
+        for(int xc = x; xc < x + 10; xc++)
+        {
+            mvprintw(yc, xc, " ");
+        }
+    }
+    attron(COLOR_PAIR(4));
+    for(int yc = y + 1; yc < y + 7; yc++)
+    {
+        for(int xc = x + 1; xc < x + 9; xc++)
         {
             mvprintw(yc, xc, " ");
         }
     }
     attron(COLOR_PAIR(1));
-    attroff(COLOR_PAIR(4));
 }
 
 void printGB(Array * gb, Cursor * c)
 {
     printBackground();
-    printCard(2, 4, gb[0].array[0]);
+    //printCard(2, 4, gb[0].array[0]);
+    printCard(2, 2, gb[0].array[0]);
+    printCard(2, 15, Array_last(&gb[T5]));
 }
 
 void refreshGB(Array * gb)

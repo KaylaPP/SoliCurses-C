@@ -12,6 +12,9 @@
 #include "../include/suits.h"
 #include "../include/values.h"
 
+// Cyan is being redefined to gray in startcurses() so this macro is made to preserve readability
+#define COLOR_GRAY COLOR_CYAN
+
 // Gets user input
 static char getinput(void);
 
@@ -27,7 +30,7 @@ static void initcards(card * deck);
 // Randomizes the order of the cards in deck
 static void shufflecards(card * deck);
 
-// Activates all attributes for the terminal using ncurses
+// Activates all attributes for the terminal using curses
 static void startcurses(void);
 
 int main(void)
@@ -147,6 +150,16 @@ static void startcurses(void)
     }
     start_color();
     
+    // Check if colors can change
+    if(can_change_color() == ERR)
+    {
+        endwin();
+        printf("Your terminal doesn't support changing of color attributes");
+        exit(1);
+    }
+
+    init_color(COLOR_GRAY, 600, 600, 600);
+
     // Initializes color pairs
     init_pair(1, COLOR_GREEN, COLOR_GREEN); // Default green background
     init_pair(2, COLOR_RED, COLOR_WHITE);   // Red text on white background
@@ -154,6 +167,8 @@ static void startcurses(void)
     init_pair(4, COLOR_BLUE, COLOR_BLUE); // Blue background for hidden cards
     init_pair(5, COLOR_RED, COLOR_YELLOW);   // Red text on yellow background
     init_pair(6, COLOR_BLACK, COLOR_YELLOW);  // Black text on yellow background
+    init_pair(7, COLOR_RED, COLOR_GRAY);   // Red text on yellow background
+    init_pair(8, COLOR_BLACK, COLOR_GRAY);  // Black text on yellow background
 
 
     // Apply default color mode and apply ncurses window attributes
