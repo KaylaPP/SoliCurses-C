@@ -5,16 +5,22 @@ This game is compatible with *nix OSes and Windows (with Cygwin)
 
 Dependencies:
 
-    gcc
-
-    make
+    *curses
     
-    ncurses
+    a compiler
+    
+    a terminal environment with color
    
 How to build and run:
     
-    make
+    Unix:
     
-    // Or
+        make
 
-    make run
+        // Or
+
+        make run
+
+    Windows:
+    
+        // tbd later
