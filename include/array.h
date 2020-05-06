@@ -10,7 +10,7 @@ typedef struct
 } Array;
 
 // Returns last item in an array
-// Likely to segfault if a->used is 0
+// Segfault possible if a->used is 0
 card * Array_last(Array * a);
 
 // Adds object to end of array with size of array considered

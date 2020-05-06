@@ -12,6 +12,10 @@ typedef struct
     value v; // Value of card
 } card;
 
+// Returns a hidden card
+card Card_hidden(void);
+
+// Returns card's color
 color Card_color(card * c);
 
 // Hides a card by setting c->r to false

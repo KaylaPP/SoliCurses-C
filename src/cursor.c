@@ -11,27 +11,27 @@ void Cursor_move(Cursor * c, direction d)
 {
     switch(d)
     {
-    case up:
-        c->y--;
-        if(c->y < 0)
-            c->y = 0;
-        break;
-    case down:
-        c->y++;
-        if(c->y > c->ymax)
-            c->y = c->ymax;
-        break;
-    case left:
-        c->x--;
-        if(c->x < 0)
-            c->x = 0;
-        break;
-    case right:
-        c->x++;
-        if(c->x > c->xmax)
-            c->x = c->xmax;
-        break;
-    default:
-        break;
+        case up:
+            c->y--;
+            if(c->y < 0)
+                c->y = 0;
+            break;
+        case down:
+            c->y++;
+            if(c->y > c->ymax)
+                c->y = c->ymax;
+            break;
+        case left:
+            c->x--;
+            if(c->x < 0)
+                c->x = 0;
+            break;
+        case right:
+            c->x++;
+            if(c->x > c->xmax)
+                c->x = c->xmax;
+            break;
+        default:
+            break;
     }
 }

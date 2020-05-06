@@ -21,10 +21,11 @@ void Array_recursive_remove(Array * a, int i)
 {
     int count = 0;
 
-    for(;i < a->size; i++)
+    while(i < a->size)
     {
         a->array[i] = NULL;
         count++;
+        i++;
     }
 
     a->used -= count;

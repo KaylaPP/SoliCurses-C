@@ -16,7 +16,7 @@
 #define COLOR_GRAY COLOR_CYAN
 
 // Gets user input
-static char getinput(void);
+static int getinput(bool repeat);
 
 // Frees gameboard
 static void freearray(Array * a);
@@ -33,8 +33,11 @@ static void shufflecards(card * deck);
 // Activates all attributes for the terminal using curses
 static void startcurses(void);
 
-int main(void)
+int main(int argc, char * argv[])
 {
+    // User input
+    int inp = '\0';
+
     // Create random seed from computer time
     srand(time(NULL));
 
@@ -54,14 +57,18 @@ int main(void)
     // Initialize array of type Array with the discard, foundation, and tableau
     Array * board = (Array *) malloc(12 * sizeof(Array));
     initarray(board, cardobjs);
+    refreshGB(board);
 
     // Initialize cursor
     Cursor cursor;
     Cursor_init(&cursor, 0, 0);
 
-    printGB(board, &cursor);
-    refresh();
-    getinput();
+    do
+    {
+        printGB(board, &cursor);
+        refresh();
+        inp = getinput(false);
+    } while(inp != 'e');
 
     // Free pointers and end ncurses window
     endwin();
@@ -70,13 +77,13 @@ int main(void)
     return 0;
 }
 
-static char getinput(void)
+static int getinput(bool repeat)
 {
-    char input;
+    int input;
     do
     {
         input = getch();
-    } while(input == ERR);
+    } while(input == ERR && repeat);
 
     return input;
 }
@@ -150,14 +157,24 @@ static void startcurses(void)
     }
     start_color();
     
-    // Check if colors can change
-    if(can_change_color() == ERR)
-    {
-        endwin();
-        printf("Your terminal doesn't support changing of color attributes");
-        exit(1);
-    }
+    printw("Resize your terminal to 63x50 chars or more then press ENTER ");
+    refresh();
+    scanw("");
 
+    // Check if colors can change
+    if(can_change_color() == FALSE)
+    {
+        printw("Your terminal doesn't support changing of color attributes!\nIf you continue, the game may look weird. Is this fine? (y/N) ");
+        refresh();
+        char isfine;
+        scanw("%c", &isfine);
+        if(isfine != 'y' && isfine != 'Y')
+        {
+            endwin();
+        	exit(1);
+        }
+    }
+    
     init_color(COLOR_GRAY, 600, 600, 600);
 
     // Initializes color pairs
@@ -167,8 +184,8 @@ static void startcurses(void)
     init_pair(4, COLOR_BLUE, COLOR_BLUE); // Blue background for hidden cards
     init_pair(5, COLOR_RED, COLOR_YELLOW);   // Red text on yellow background
     init_pair(6, COLOR_BLACK, COLOR_YELLOW);  // Black text on yellow background
-    init_pair(7, COLOR_RED, COLOR_GRAY);   // Red text on yellow background
-    init_pair(8, COLOR_BLACK, COLOR_GRAY);  // Black text on yellow background
+    init_pair(7, COLOR_RED, COLOR_GRAY);   // Red text on gray/cyan background
+    init_pair(8, COLOR_BLACK, COLOR_GRAY);  // Black text on gray/cyan background
 
 
     // Apply default color mode and apply ncurses window attributes
