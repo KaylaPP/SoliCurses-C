@@ -1,3 +1,6 @@
+#ifdef _MSVC_TRADITIONAL
+    #define PDC_WIDE
+#endif
 #include <curses.h>
 #include <locale.h>
 #include <stdbool.h>
@@ -19,10 +22,7 @@
 static int getinput(bool repeat);
 
 // Frees gameboard
-static void freearray(Array * a);
-
-// Initializes array with 52 cards distributed on the gameboard
-static void initarray(Array * a, card * deck);
+static void freearray(GB * gb);
 
 // Adds 52 unique cards to deck
 static void initcards(card * deck);
@@ -55,9 +55,9 @@ int main(int argc, char * argv[])
     shufflecards(cardobjs);
 
     // Initialize array of type Array with the discard, foundation, and tableau
-    Array * board = (Array *) malloc(12 * sizeof(Array));
-    initarray(board, cardobjs);
-    refreshGB(board);
+    GB board;
+    initGB(&board, cardobjs);
+    refreshGB(&board);
 
     // Initialize cursor
     Cursor cursor;
@@ -65,14 +65,13 @@ int main(int argc, char * argv[])
 
     do
     {
-        printGB(board, &cursor);
+        printGB(&board, &cursor);
         refresh();
         inp = getinput(false);
     } while(inp != 'e');
 
     // Free pointers and end ncurses window
     endwin();
-    freearray(board);
 
     return 0;
 }
@@ -86,39 +85,6 @@ static int getinput(bool repeat)
     } while(input == ERR && repeat);
 
     return input;
-}
-
-static void freearray(Array * a)
-{
-    for(int i = DS; i <= T7; i++)
-    {
-        Array_deallocate(&a[i]);
-    }
-    free(a);
-}
-
-static void initarray(Array * a, card * deck)
-{
-    int count = 0;
-
-    for(int i = DS; i <= T7; i++)
-    {
-        Array_init(&a[i], 1);
-    }
-
-    for(int i = T1; i <= T7; i++)
-    {
-        for(int j = 0; j <= i - T1; j++)
-        {
-            Array_append(&a[i], &deck[count++]);
-        }
-        Card_reveal(Array_last(&a[i]));
-    }
-
-    while(count < 52)
-    {
-        Array_append(&a[DS], &deck[count++]);
-    }
 }
 
 static void initcards(card * deck)
@@ -156,10 +122,6 @@ static void startcurses(void)
         exit(1);
     }
     start_color();
-    
-    printw("Resize your terminal to 63x50 chars or more then press ENTER ");
-    refresh();
-    scanw("");
 
     // Check if colors can change
     if(can_change_color() == FALSE)
