@@ -1,7 +1,6 @@
-# SoliCurses-C
-A remake of SoliCurses in C with improved UI
+# SoliCurses-C (defunct project; migrated to SoliCurses-Final using C++)
 
-This game is compatible with *nix OSes and Windows (with Cygwin)
+A remake of SoliCurses in C with improved UI
 
 Dependencies:
 
